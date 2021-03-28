@@ -37,6 +37,22 @@ public class MixinServerPlayNetworkHandler {
         Identifier id = new Identifier(copy.getOrCreateTag().getString(Constants.TAG_KEY));
         Item item = Registry.ITEM.get(id);
         ((ItemStackAccessor) (Object) copy).setItem(item);
+        CompoundTag tag = copy.getTag();
+        if (tag != null) {
+            tag.remove(Constants.TAG_KEY);
+            ItemStack defaultVisualStack = ((ServerSideItem) item).createVisualStack(item.getDefaultStack());
+            CompoundTag displayTag = copy.getSubTag("display");
+            if (displayTag.get("Name").equals(defaultVisualStack.getSubTag("display").get("Name"))) {
+                displayTag.remove("Name");
+
+                if (displayTag.isEmpty()) {
+                    tag.remove("display");
+                }
+            }
+            if (tag.isEmpty()) {
+                copy.setTag(null);
+            }
+        }
         return copy;
     }
 }

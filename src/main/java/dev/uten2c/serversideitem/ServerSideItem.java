@@ -9,13 +9,14 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import org.jetbrains.annotations.NotNull;
 
 public interface ServerSideItem {
 
     Item getVisualItem();
 
     @SuppressWarnings("ConstantConditions")
-    default ItemStack createVisualStack(ItemStack stack) {
+    default ItemStack createVisualStack(@NotNull ItemStack stack) {
         Item item = stack.getItem();
         Identifier id = Registry.ITEM.getId(item);
         String translationKey = "item." + id.getNamespace() + "." + id.getPath();

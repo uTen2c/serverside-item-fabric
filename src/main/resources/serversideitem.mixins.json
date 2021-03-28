@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.uten2c.serversideitem.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinEntityEquipmentUpdateS2CPacket",
+    "MixinEntityTrackerUpdateS2CPacket",
+    "MixinInventoryS2CPacket",
+    "MixinScreenHandlerSlotUpdateS2CPacket",
+    "MixinServerPlayNetworkHandler",
+    "accessor.ItemStackAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

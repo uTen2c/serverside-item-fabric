@@ -42,7 +42,7 @@ public class MixinServerPlayNetworkHandler {
             tag.remove(Constants.TAG_KEY);
             ItemStack defaultVisualStack = ((ServerSideItem) item).createVisualStack(item.getDefaultStack());
             CompoundTag displayTag = copy.getSubTag("display");
-            if (displayTag.get("Name").equals(defaultVisualStack.getSubTag("display").get("Name"))) {
+            if (displayTag != null && displayTag.get("Name").equals(defaultVisualStack.getSubTag("display").get("Name"))) {
                 displayTag.remove("Name");
 
                 if (displayTag.isEmpty()) {
@@ -53,6 +53,7 @@ public class MixinServerPlayNetworkHandler {
                 copy.setTag(null);
             }
         }
+        System.out.println(copy);
         return copy;
     }
 }

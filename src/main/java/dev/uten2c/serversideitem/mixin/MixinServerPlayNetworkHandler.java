@@ -53,7 +53,6 @@ public class MixinServerPlayNetworkHandler {
                 copy.setTag(null);
             }
         }
-        System.out.println(copy);
         return copy;
     }
 }

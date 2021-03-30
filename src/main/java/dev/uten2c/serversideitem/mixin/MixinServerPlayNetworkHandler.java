@@ -6,6 +6,7 @@ import dev.uten2c.serversideitem.mixin.accessor.ItemStackAccessor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.packet.c2s.play.CreativeInventoryActionC2SPacket;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.util.Identifier;
@@ -41,11 +42,14 @@ public class MixinServerPlayNetworkHandler {
         if (tag != null) {
             tag.remove(Constants.TAG_KEY);
             ItemStack defaultVisualStack = ((ServerSideItem) item).createVisualStack(item.getDefaultStack());
-            CompoundTag displayTag = copy.getSubTag("display");
-            if (displayTag != null && displayTag.get("Name").equals(defaultVisualStack.getSubTag("display").get("Name"))) {
-                displayTag.remove("Name");
-
-                if (displayTag.isEmpty()) {
+            CompoundTag displayTag1 = copy.getSubTag("display");
+            CompoundTag displayTag2 = defaultVisualStack.getSubTag("display");
+            if (displayTag1 != null && displayTag2 != null) {
+                Tag nameTag1 = displayTag1.get("Name");
+                if (nameTag1 != null && nameTag1.equals(displayTag2.get("Name"))) {
+                    displayTag1.remove("Name");
+                }
+                if (displayTag1.isEmpty()) {
                     tag.remove("display");
                 }
             }

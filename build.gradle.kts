@@ -7,7 +7,7 @@ plugins {
 base {
     archivesBaseName = "serverside-item-fabric"
     group = "dev.uten2c"
-    version = "1.16.5+4"
+    version = "1.16.5+5"
 }
 
 tasks.getByName<ProcessResources>("processResources") {

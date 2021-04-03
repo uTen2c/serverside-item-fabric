@@ -16,7 +16,8 @@ public interface ServerSideItem {
     Item getVisualItem();
 
     @SuppressWarnings("ConstantConditions")
-    default ItemStack createVisualStack(@NotNull ItemStack stack) {
+    default ItemStack createVisualStack(@NotNull ItemStack itemStack) {
+        ItemStack stack = itemStack.copy();
         Item item = stack.getItem();
         Identifier id = Registry.ITEM.getId(item);
         String translationKey = "item." + id.getNamespace() + "." + id.getPath();
